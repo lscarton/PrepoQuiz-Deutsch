@@ -115,20 +115,27 @@ verbs = [
     ("zweifeln", "an", "D", "John zweifelt __ , dass sein Sohn die Wahrheit gesagt hat."),
 ]
 
+prepositions = {
+    "für", "um", 
+    "aus", "bei", "mit", "nach", "seit", "von", "zu", 
+    "an", "auf", "in", "über", "vor"
+    }
+
 # Function to play the game in mode 1
 def mode_1():
     verb, correct_preposition, correct_case, sentence = random.choice(verbs)
     print(f"Verb: {verb}")
     print(f"Example sentence: {sentence}")
-    
-    options = [correct_preposition, "an", "über", "zu"]
+    options = set(random.shuffle(list(prepositions))[4])
+    options = list(options.add(correct_preposition))
     random.shuffle(options)
     
     print("Choose the correct preposition for the blank:")
+    max_id = len(options)
     for idx, option in enumerate(options, 1):
         print(f"{idx}. {option}")
     
-    user_input = input("Your choice (1, 2, 3, 4): ").strip()
+    user_input = input("Your choice ({[i+1 for i in range(max_id)]}): ").strip()
     if user_input.lower() == 'q':
         return False  # Exit game if 'q' or 'Q' is pressed
     
