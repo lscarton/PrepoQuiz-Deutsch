@@ -155,6 +155,7 @@ def mode_2():
     options_preposition.add(correct_preposition)
     options_preposition = list(options_preposition)
     random.shuffle(options_preposition)
+    max_id = len(options_preposition)
     
     print("Choose the correct preposition for the blank:")
     for idx, option in enumerate(options_preposition, 1):
