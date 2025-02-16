@@ -126,7 +126,7 @@ def mode_1():
     verb, correct_preposition, correct_case, sentence = random.choice(verbs)
     print(f"Verb: {verb}")
     print(f"Example sentence: {sentence}")
-    options = set(random.shuffle(list(prepositions))[4])
+    options = set(random.sample(list(prepositions), 4))
     options = list(options.add(correct_preposition))
     random.shuffle(options)
     
@@ -151,7 +151,8 @@ def mode_2():
     print(f"Verb: {verb}")
     print(f"Example sentence: {sentence}")
     
-    options_preposition = [correct_preposition, "an", "über", "zu"]
+    options_preposition = set(random.sample(list(prepositions), 4))
+    options_preposition = list(options.add(correct_preposition))
     random.shuffle(options_preposition)
     
     print("Choose the correct preposition for the blank:")
