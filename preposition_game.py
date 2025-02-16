@@ -120,104 +120,102 @@ prepositions = {
     "an", "auf", "in", "über", "vor"
     }
 
+cases_dict = {"A": "Accusative", "D": "Dative", "G": "Genitive"}
 # Function to play the game in mode 1
+def get_user_choice(options):
+    """Helper function to handle user input."""
+    while True:
+        user_input = input(f"Your choice (1 - {len(options)}): ").strip()
+        if user_input.lower() == 'q':
+            return None
+        if user_input.isdigit():
+            choice = int(user_input)
+            if 1 <= choice <= len(options):
+                return options[choice - 1]
+        print("Invalid choice. Please try again.")
+
 def mode_1():
-    verb, correct_preposition, correct_case, sentence = random.choice(verbs)
-    print(f"Verb: {verb}")
+    """Mode where the user guesses only the preposition."""
+    verb, correct_preposition, _, sentence = random.choice(verbs)
+    print(f"\nVerb: {verb}")
     print(f"Example sentence: {sentence}")
-    options = set(random.sample(list(prepositions), 4))
-    options.add(correct_preposition)
-    options = list(options)
+
+    options = list(random.sample(prepositions, 4)) + [correct_preposition]
     random.shuffle(options)
-    
-    print("Choose the correct preposition for the blank:")
-    max_id = len(options)
+
     for idx, option in enumerate(options, 1):
         print(f"{idx}. {option}")
-    
-    user_input = input(f"Your choice (1 - {max_id}): ").strip()
-    if user_input.lower() == 'q':
-        return False  # Exit game if 'q' or 'Q' is pressed
-    
-    if options[int(user_input)-1] == correct_preposition:
-        print("Correct! Well done.")
+
+    user_choice = get_user_choice(options)
+    if user_choice is None:
+        return False
+
+    if user_choice == correct_preposition:
+        print("✅ Correct! Well done.")
     else:
-        print(f"Oops! The correct preposition is '{correct_preposition}'.")
+        print(f"❌ Oops! The correct preposition is '{correct_preposition}'.")
+    
     return True
 
-# Function to play the game in mode 2
 def mode_2():
+    """Mode where the user guesses the preposition and the grammatical case."""
     verb, correct_preposition, correct_case, sentence = random.choice(verbs)
-    print(f"Verb: {verb}")
+    print(f"\nVerb: {verb}")
     print(f"Example sentence: {sentence}")
-    
-    options_preposition = set(random.sample(list(prepositions), 4))
-    options_preposition.add(correct_preposition)
-    options_preposition = list(options_preposition)
+
+    options_preposition = list(random.sample(prepositions, 4)) + [correct_preposition]
     random.shuffle(options_preposition)
-    max_id = len(options_preposition)
-    
-    print("Choose the correct preposition for the blank:")
+
     for idx, option in enumerate(options_preposition, 1):
         print(f"{idx}. {option}")
-    
-    preposition_choice = input(f"Your choice (1 - {max_id}): ").strip()
-    if preposition_choice.lower() == 'q':
-        return False  # Exit game if 'q' or 'Q' is pressed
-    
-    chosen_preposition = options_preposition[int(preposition_choice)-1]
-    
-    if chosen_preposition == correct_preposition:
-        print(f"Correct! The preposition is '{chosen_preposition}'.")
+
+    preposition_choice = get_user_choice(options_preposition)
+    if preposition_choice is None:
+        return False
+
+    if preposition_choice == correct_preposition:
+        print(f"✅ Correct preposition: '{preposition_choice}'")
         
-        options_case = ["Accusative", "Dative", "Genitive"]
-        random.shuffle(options_case)
-        
-        print("Now choose the correct case:")
-        for idx, option in enumerate(options_case, 1):
+        case_options = list(cases_dict.values())
+        random.shuffle(case_options)
+
+        for idx, option in enumerate(case_options, 1):
             print(f"{idx}. {option}")
-        
-        case_choice = input("Your choice (1, 2, 3): ").strip()
-        if case_choice.lower() == 'q':
-            return False  # Exit game if 'q' or 'Q' is pressed
-        
-        case_dict = {"Accusative": "A", "Dative": "D", "Genitive": "G"}
-        
-        if case_dict[options_case[int(case_choice)-1]] == correct_case:
-            print("Correct case! Well done.")
+
+        case_choice = get_user_choice(case_options)
+        if case_choice is None:
+            return False
+
+        if case_choice == cases_dict[correct_case]:
+            print("✅ Correct case! Well done.")
         else:
-            print(f"Oops! The correct case is '{correct_case}'.")
+            print(f"❌ Oops! The correct case is '{cases_dict[correct_case]}'.")
     else:
-        print(f"Oops! The correct preposition is '{correct_preposition}'.")
+        print(f"❌ Oops! The correct preposition is '{correct_preposition}'.")
     
     return True
 
-# Main function to select mode
 def main():
-    print("Welcome to the German Verb-Preposition Game!")
-    print("Choose a mode:")
-    print("1: Guess only the preposition")
-    print("2: Guess the preposition and case")
-    
-    mode = input("Enter 1 or 2: ").strip()
-    
-    if mode == '1':
-        while True:
-            if not mode_1():
-                break
-            exit_input = input("Press 'q' to quit or any other key to continue: ").strip().lower()
-            if exit_input == 'q':
-                break
-    elif mode == '2':
-        while True:
-            if not mode_2():
-                break
-            exit_input = input("Press 'q' to quit or any other key to continue: ").strip().lower()
-            if exit_input == 'q':
-                break
-    else:
-        print("Invalid mode. Please restart the game and choose a valid mode.")
+    """Main function to start the game."""
+    print("\n🎮 Welcome to the German Verb-Preposition Game!")
+    print("1️⃣  Guess only the preposition")
+    print("2️⃣  Guess the preposition and case")
+    print("Press 'q' to quit at any time.")
+
+    while True:
+        mode = input("\nChoose a mode (1 or 2): ").strip()
+        if mode == '1':
+            while mode_1():
+                pass
+        elif mode == '2':
+            while mode_2():
+                pass
+        elif mode.lower() == 'q':
+            break
+        else:
+            print("Invalid choice. Please enter 1 or 2.")
+
+    print("\n👋 Thanks for playing! Bis bald!")
 
 if __name__ == "__main__":
     main()
-
