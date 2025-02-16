@@ -13,7 +13,7 @@ PrepoQuiz Deutsch is a fun and educational game designed to help learners master
 
 3. Answer multiple-choice questions by selecting the correct option.
 4. Get instant feedback on your answers.
-5. Press 'q' at any time to quit the game.
+5. Press `q` at any time to quit the game.
 
 ## Requirements
 
