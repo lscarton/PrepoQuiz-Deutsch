@@ -135,7 +135,7 @@ def mode_1():
     for idx, option in enumerate(options, 1):
         print(f"{idx}. {option}")
     
-    user_input = input("Your choice (1 - {max_id}): ").strip()
+    user_input = input(f"Your choice (1 - {max_id}): ").strip()
     if user_input.lower() == 'q':
         return False  # Exit game if 'q' or 'Q' is pressed
     
@@ -160,7 +160,7 @@ def mode_2():
     for idx, option in enumerate(options_preposition, 1):
         print(f"{idx}. {option}")
     
-    preposition_choice = input("Your choice (1 - {max_id}): ").strip()
+    preposition_choice = input(f"Your choice (1 - {max_id}): ").strip()
     if preposition_choice.lower() == 'q':
         return False  # Exit game if 'q' or 'Q' is pressed
     
