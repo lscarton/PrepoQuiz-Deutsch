@@ -114,11 +114,11 @@ verbs = [
     ("zweifeln", "an", "D", "John zweifelt __ , dass sein Sohn die Wahrheit gesagt hat."),
 ]
 
-prepositions = {
+prepositions = [
     "für", "um", 
     "aus", "bei", "mit", "nach", "seit", "von", "zu", 
     "an", "auf", "in", "über", "vor"
-    }
+]
 
 cases_dict = {"A": "Accusative", "D": "Dative", "G": "Genitive"}
 # Function to play the game in mode 1
