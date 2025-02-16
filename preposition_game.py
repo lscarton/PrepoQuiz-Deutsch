@@ -152,7 +152,7 @@ def mode_2():
     print(f"Example sentence: {sentence}")
     
     options_preposition = set(random.sample(list(prepositions), 4))
-    options_preposition = list(options.add(correct_preposition))
+    options_preposition = list(options_preposition.add(correct_preposition))
     random.shuffle(options_preposition)
     
     print("Choose the correct preposition for the blank:")
