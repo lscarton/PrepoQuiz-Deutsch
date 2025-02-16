@@ -127,7 +127,8 @@ def mode_1():
     print(f"Verb: {verb}")
     print(f"Example sentence: {sentence}")
     options = set(random.sample(list(prepositions), 4))
-    options = list(options.add(correct_preposition))
+    options.add(correct_preposition)
+    options = list(options)
     random.shuffle(options)
     
     print("Choose the correct preposition for the blank:")
@@ -135,7 +136,7 @@ def mode_1():
     for idx, option in enumerate(options, 1):
         print(f"{idx}. {option}")
     
-    user_input = input("Your choice ({[i+1 for i in range(max_id)]}): ").strip()
+    user_input = input("Your choice (1 - {max_id}): ").strip()
     if user_input.lower() == 'q':
         return False  # Exit game if 'q' or 'Q' is pressed
     
@@ -152,14 +153,15 @@ def mode_2():
     print(f"Example sentence: {sentence}")
     
     options_preposition = set(random.sample(list(prepositions), 4))
-    options_preposition = list(options_preposition.add(correct_preposition))
+    options_preposition.add(correct_preposition)
+    options_preposition = list(options_preposition)
     random.shuffle(options_preposition)
     
     print("Choose the correct preposition for the blank:")
     for idx, option in enumerate(options_preposition, 1):
         print(f"{idx}. {option}")
     
-    preposition_choice = input("Your choice (1, 2, 3, 4): ").strip()
+    preposition_choice = input("Your choice (1 - {max_id}): ").strip()
     if preposition_choice.lower() == 'q':
         return False  # Exit game if 'q' or 'Q' is pressed
     
