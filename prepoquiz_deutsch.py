@@ -140,7 +140,7 @@ def mode_1():
     print(f"\nVerb: {verb}")
     print(f"Example sentence: {sentence}")
 
-    options = list(random.sample(prepositions, 4)) + [correct_preposition]
+    options = list(set(random.sample(prepositions, 4) + [correct_preposition]))
     random.shuffle(options)
 
     for idx, option in enumerate(options, 1):
@@ -163,7 +163,7 @@ def mode_2():
     print(f"\nVerb: {verb}")
     print(f"Example sentence: {sentence}")
 
-    options_preposition = list(random.sample(prepositions, 4)) + [correct_preposition]
+    options_preposition = list(set(random.sample(prepositions, 4) + [correct_preposition]))
     random.shuffle(options_preposition)
 
     for idx, option in enumerate(options_preposition, 1):
